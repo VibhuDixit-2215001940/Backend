@@ -41,6 +41,7 @@
 // app.listen(8000)
 
 //------------------------------DAY 3(app.use())--------------------------------
+//Kisi bhi middleware ko use karne ke liye ham log app.use() ka use karte hai
 // const express = require('express')
 // const app = express()
 // //MALWARE KA YE KAAM HOTA HAI KI JAB BROWSER KOI ROUTE REQUEST KARTA HAI THEN BEFORE REACHING T ROUT
@@ -134,20 +135,185 @@
 
 //-------------------------------DAY 7(Cookie) -------------------------------
 //Agar aap chahate ho ki user aapke kissi route par jaaye toh aap kuch data uske broweser par save karana cahate ho toh toh isse kahate hai cookie
+// const express = require('express')
+// const app = express()
+// const cookieParser = require('cookie-parser')
+// app.use(cookieParser())
+// app.get('/', function(req, res) {
+//     res.send('Kya re bhadwe kya dekh rha hai!!')
+// })
+// app.get('/ok',function(req,res){
+//     res.cookie('ok',true)//cookie msg ko set karne ke liye koi package na chahiye but read karne ke liye cookie parser package chahiye hoga ok
+//     console.log(req.cookies.ok) 
+//     res.send('Cookie created!!')
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on port 8000')
+// })
+
+// //-------------------------------DAY 8(morgan) -------------------------------
+// //Jab bhi aap apna server start kar denge and browser agar request fekega kissi bhi route par toh uss request se related info aapko morgan laake deta hai!!
+// const express = require('express')
+// const app = express()
+// const morgan = require('morgan')
+
+// // app.use(morgan()) ::ffff:127.0.0.1 - - [Sun, 13 Oct 2024 05:46:41 GMT] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+// // ::ffff:127.0.0.1 - - [Sun, 13 Oct 2024 05:46:41 GMT] "GET /favicon.ico HTTP/1.1" 404 150 "http://127.0.0.1:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+
+// // app.use(morgan('combined'))//::ffff:127.0.0.1 - - [13/Oct/2024:05:47:44 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+
+// app.use(morgan('dev'))//GET / 304 5.689 ms - -
+
+// // app.use(morgan('tiny'))//GET / 304 - - 7.487 ms
+
+// // app.use(morgan('short'))//::ffff:127.0.0.1 - GET / HTTP/1.1 304 - - 5.041 ms
+
+// app.get('/', function(req, res) {
+//     res.send('Kya re bhadwe kya dekh rha hai!!')
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on port 8000')
+// })
+
+// //-------------------------------DAY 9(req,res) -------------------------------
+// //Isme wo saara data hota hai jo browser se aa raha hai ok
+// //FRONTEND(browser) ------req-----> BACKEND(server)------res-----> FRONTEND 
+// const express = require('express')
+// const app = express()
+// //So req kia hua data sab browser se aata hai means frontednd to backend server
+// app.get('/',function(req,res){
+//     // console.log('Hey raand!!')
+//     // console.log(req)
+//     // console.log(req.params)//{}
+//     // console.log(req.query)//{}
+//     // console.log(req.params)//undefined
+//     // console.log(req.cookies)//undefined
+//     // console.log(req.ip)//::ffff:127.0.0.1
+//     // console.log(req.port)//undefined
+//     // console.log(req.headers)//mota maati info
+//     console.log(req.url)// '/'
+//     console.log(req.method)//GET
+//     // console.log(res)
+//     res.send('Kya re bhadwe kya dekh rha')
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+// //-------------------------------DAY 10(Dyanamic Routing) -------------------------------
+// //Static routing mens we set urls for each and evry route for our web which is impossible 
+// //For ex. For peofile url '/profile/ansh','/profile/kansh'..... for this infinite route has to be made which is impossible
+// //Here comes dynamic routing where the url gets dynamic behaviour whatever we write in some portion of url it get redirect according to it...!!
+// const express = require('express')
+// const app = express()
+
+// app.get('/',function(req,res){
+//     res.send('Raand')
+// })
+// // app.get('/profile/:username',function(req,res){ //This will be run for every name 
+// //     res.send('User ji aapka naam hai raand')
+// // })
+// // app.get('/profile/:username',function(req,res){ //Now access that name and print it to the page 
+// //     //Now for accessing the data from frontend to backend we have to use req.
+// //     res.send('User ji aapka naam hai '+req.params.username+' ji')
+// // })
+// // app.get('/profile/:username/:age',function(req,res){ //Now for more than one dyanamic route
+// //     //Now for accessing the data from frontend to backend we have to use req.
+// //     res.send('User ji aapka naam hai '+req.params.username+' ji'+' aapki umara hai '+req.params.age)
+// // })
+// //                                  OR 
+// app.get('/profile/:username/:age',function(req,res){ //Now for more than one dyanamic route
+//     //Now for accessing the data from frontend to backend we have to use req.
+//     res.send(`User ji aapka naam hai ${req.params.username} aapki umara hai ${req.params.age}`)
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+// //-------------------------------DAY 11(Server Side Rendering-->ejs) -------------------------------
+// //For creating a server side rendering we use express with ejs!
+// //ejs is html with superpowers
+// const express = require('express')
+// const app= express()
+
+// // Set EJS as the view engine
+// app.set('view engine','ejs')
+// //Ye ejs kya karta hai jo file render ho rahi hai views ki ejs file wo uska replicate ek actual html file banata hai jo ki static hota hai uss <%= %> inn sab tag ko solve karke jo value aayegi unhe statically rakhta hai ussi jagah!!
+// // Phir wo static html file browser ko bhejega ....kyunki brwser toh ejs samjhta hi nahi hai!!
+// //Issi ko ham server side rendering kahate hai!!
+// //REACT KYA KARTA HAi?? React SSR nahi karta usme actually server se html,css,js ka bundle aata hai to browser 
+// app.get('/',function(req,res){
+//     res.send('Kya re bhadwe kya dekh raha hai !!')
+// })
+// // Route to render an EJS template
+// app.get('/home', (req, res) => {
+//     res.render('index', { title: 'Home Page', content: 'Welcome to the home page!' });//Render hamesha wahi page karte hai jo views mai ho ok!!
+//   });
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+//-------------------------------DAY 12(Form Handling) -------------------------------
+// const express = require('express')
+// const app= express()
+
+// app.set('view engine','ejs')
+
+// // Both below line used for data fetching from query i.e. url data
+// app.use(express.json())
+// app.use(express.urlencoded({ extended:true }))
+
+// app.get('/',function(req,res){
+//     res.render('index')
+// })
+
+// app.get('/check',function(req,res){
+//     res.send(`Chal raha hai!! ${req.query.name} and ${req.query.email}`)
+// })
+
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+//-------------------------------DAY 13(Form Handling with POST) -------------------------------
+// const express = require('express')
+// const app= express()
+
+// app.set('view engine','ejs')
+
+// // Both below line used for data fetching from body i.e. url data for method post
+// app.use(express.json())
+// app.use(express.urlencoded({ extended:true }))//If we comment this only then value will be undefined
+
+// app.get('/',function(req,res){
+//     res.render('index')
+// })
+
+// app.post('/check',function(req,res){
+//     res.send(`Chal raha hai!! ${req.body.name} and ${req.body.email}`)
+// })
+
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+//-------------------------------DAY 14(API Basics) -------------------------------
 const express = require('express')
-const app = express()
-const cookieParser = require('cookie-parser')
-app.use(cookieParser())
-app.get('/', function(req, res) {
-    res.send('Kya re bhadwe kya dekh rha hai!!')
-})
-app.get('/ok',function(req,res){
-    res.cookie('ok',true)//cookie msg ko set karne ke liye koi package na chahiye but read karne ke liye cookie parser package chahiye hoga ok
-    console.log(req.cookies.ok) 
-    res.send('Cookie created!!')
-})
-app.listen(8000,()=>{
-    console.log('Server is running on port 8000')
+const app= express()
+
+app.set('view engine','ejs')
+
+app.use(express.json())
+app.use(express.urlencoded({ extended:true }))
+
+app.get('/',function(req,res){
+    res.send("Hey Raand!!")
+    // res.render('index')
 })
 
-//-------------------------------DAY 8() -------------------------------
+app.get('/check',function(req,res){
+    res.send("Yup")
+    // res.send(`Chal raha hai!! ${req.body.name} and ${req.body.email}`)
+})
+app.listen(8000,()=>{
+    console.log('Server is running on 8000')
+})

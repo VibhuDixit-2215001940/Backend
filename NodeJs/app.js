@@ -297,22 +297,64 @@
 // })
 
 //-------------------------------DAY 14(API Basics) -------------------------------
+// const express = require('express')
+// const app= express()
+
+// app.set('view engine','ejs')
+
+// app.use(express.json())
+// app.use(express.urlencoded({ extended:true }))
+
+// app.get('/',function(req,res){
+//     res.send("Hey Raand!!")
+//     // res.render('index')
+// })
+
+// app.get('/check',function(req,res){
+//     res.send("Yup")
+//     // res.send(`Chal raha hai!! ${req.body.name} and ${req.body.email}`)
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+// //-------------------------------DAY 15(Error Handling In API) -------------------------------
+// const express = require('express')
+// const app= express()
+
+// app.set('view engine','ejs')
+
+// app.get('/',function(req,res,next){
+//     try{
+//         res.send("Hey Raand!!")
+//     }
+//     catch(err){
+//         next(err)
+//     }
+// }) 
+
+// app.get('/check',function(req,res){
+//     res.send("Yup")
+// })
+// app.use((err,req,res,next)=>{
+//     res.status(500).send(err.message)
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+// //-------------------------------DAY 16(Error Handling In API) -------------------------------
 const express = require('express')
 const app= express()
 
 app.set('view engine','ejs')
 
-app.use(express.json())
-app.use(express.urlencoded({ extended:true }))
-
 app.get('/',function(req,res){
     res.send("Hey Raand!!")
-    // res.render('index')
-})
+}) 
 
-app.get('/check',function(req,res){
+app.get('/user/profile/view',function(req,res){
     res.send("Yup")
-    // res.send(`Chal raha hai!! ${req.body.name} and ${req.body.email}`)
 })
 app.listen(8000,()=>{
     console.log('Server is running on 8000')

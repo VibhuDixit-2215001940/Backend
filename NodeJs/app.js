@@ -344,17 +344,31 @@
 // })
 
 // //-------------------------------DAY 16(Error Handling In API) -------------------------------
+// const express = require('express')
+// const app= express()
+
+// app.set('view engine','ejs')
+
+// app.get('/',function(req,res){
+//     res.send("Hey Raand!!")
+// }) 
+
+// app.get('/user/profile/view',function(req,res){
+//     res.send("Yup")
+// })
+// app.listen(8000,()=>{
+//     console.log('Server is running on 8000')
+// })
+
+//-------------------------------DAY 17(Integrating Mongoose With Express) ------------------------
 const express = require('express')
-const app= express()
+const app = express()
+const mongooseconnections = require('./config/mongoose')
 
 app.set('view engine','ejs')
 
 app.get('/',function(req,res){
     res.send("Hey Raand!!")
-}) 
-
-app.get('/user/profile/view',function(req,res){
-    res.send("Yup")
 })
 app.listen(8000,()=>{
     console.log('Server is running on 8000')
